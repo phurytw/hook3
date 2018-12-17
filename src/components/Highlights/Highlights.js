@@ -1,8 +1,12 @@
-import dateFormat from 'date-fns/format';
 import { truncate } from 'lodash-es';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {
+  FormattedMessage,
+  FormattedHTMLMessage,
+  FormattedDate,
+} from 'react-intl';
 import Highlight from '../Highlight';
 import useHasElementEntered from '../../hooks/useHasElementEntered';
 import { primary } from '../colors';
@@ -80,59 +84,101 @@ const Highlights = ({ longestRun, mostFrequentRun, biggestFan, totalRuns }) => {
       <Highlight
         url={`https://www.strava.com/activities/${longestRun.id}`}
         renderTitle={() => (
-          <span>
-            Your longest run was{' '}
-            <strong>
-              {truncate(longestRun.name, {
+          <FormattedHTMLMessage
+            id="highlights.longestRunTitle"
+            values={{
+              run: truncate(longestRun.name, {
                 separator: /,? +/,
-              })}
-            </strong>
-          </span>
+              }),
+            }}
+          />
         )}
         renderHighlight={() => (
-          <strong>{(longestRun.distance / 1000).toPrecision(5)} km</strong>
+          <strong>
+            <FormattedMessage
+              id="highlights.longestRunHighlight"
+              values={{ distance: (longestRun.distance / 1000).toPrecision(3) }}
+            />
+          </strong>
         )}
         renderSubtitle={() => (
           <span>
-            Done on {dateFormat(longestRun.date, 'dddd DD MMMM YYYY')}
+            <FormattedMessage id="highlights.longestRunSubtitle" />
+            <FormattedDate
+              value={new Date(longestRun.date)}
+              day="2-digit"
+              weekday="long"
+              month="long"
+              year="numeric"
+            />
           </span>
         )}
       />
       <Highlight
         url={`https://www.strava.com/activities/${mostFrequentRun.id}`}
         renderTitle={() => (
-          <span>
-            Your most frequent run is{' '}
-            <strong>
-              {truncate(mostFrequentRun.name, {
+          <FormattedHTMLMessage
+            id="highlights.mostFrequentRunTitle"
+            values={{
+              run: truncate(mostFrequentRun.name, {
                 separator: /,? +/,
-              })}
-            </strong>
-          </span>
+              }),
+            }}
+          />
         )}
-        renderHighlight={() => <strong>{mostFrequentRun.count} times</strong>}
+        renderHighlight={() => (
+          <strong>
+            <FormattedMessage
+              id="highlights.mostFrequentRunHighlight"
+              values={{ count: mostFrequentRun.count }}
+            />
+          </strong>
+        )}
         renderSubtitle={() => (
           <span>
-            Last run on{' '}
-            <em>{dateFormat(mostFrequentRun.date, 'dddd DD MMMM YYYY')}</em>
+            <FormattedMessage id="highlights.mostFrequentRunSubtitle" />
+            <FormattedDate
+              value={new Date(mostFrequentRun.date)}
+              day="2-digit"
+              weekday="long"
+              month="long"
+              year="numeric"
+            />
           </span>
         )}
       />
       <Highlight
         url={`https://www.strava.com/athletes/${biggestFan.id}`}
         renderTitle={() => (
-          <span>
-            Your biggest fan is <strong>{biggestFan.name}</strong>
-          </span>
+          <FormattedHTMLMessage
+            id="highlights.biggestFanTitle"
+            values={{ fan: biggestFan.name }}
+          />
         )}
         renderHighlight={() => <img src={biggestFan.picture} alt="" />}
-        renderSubtitle={() => <strong>{biggestFan.count} total kudos!</strong>}
+        renderSubtitle={() => (
+          <strong>
+            <FormattedMessage
+              id="highlights.biggestFanSubtitle"
+              values={{ kudos: biggestFan.count }}
+            />
+          </strong>
+        )}
       />
       <Highlight
         url={`https://www.strava.com/athletes/${totalRuns.athleteId}`}
-        renderTitle={() => <span>You have run a total of</span>}
-        renderHighlight={() => <strong>{totalRuns.count} times</strong>}
-        renderSubtitle={() => <span>so far!</span>}
+        renderTitle={() => <FormattedMessage id="highlights.totalRunsTitle" />}
+        renderHighlight={() => (
+          <strong>
+            <FormattedMessage
+              id="highlights.totalRunsHighlight"
+              values={{ runs: totalRuns.count }}
+            />
+          </strong>
+        )}
+        renderSubtitle={() => (
+          <FormattedMessage id="highlights.totalRunsSubtitle" />
+        )}
       />
     </HighlightsContainer>
   );

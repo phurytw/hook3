@@ -1,9 +1,11 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { storiesOf } from '@storybook/react';
 import { withConsole } from '@storybook/addon-console';
 import RunComparison from './RunComparison';
 import Container from '../Container';
 import SelectedItemProvider from '../../contexts/SelectedItemProvider';
+import i18n from '../../i18n';
 
 const runs = [
   {
@@ -281,9 +283,11 @@ export const props = {
 storiesOf('Screen: Run Comparison', module)
   .addDecorator((story, context) =>
     withConsole()(() => (
-      <SelectedItemProvider>
-        <Container>{story()}</Container>
-      </SelectedItemProvider>
+      <IntlProvider locale="en-US" messages={i18n['en-US']}>
+        <SelectedItemProvider>
+          <Container>{story()}</Container>
+        </SelectedItemProvider>
+      </IntlProvider>
     ))(context)
   )
   .add('default', () => <RunComparison {...props} />);

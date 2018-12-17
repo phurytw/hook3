@@ -6,6 +6,7 @@ import { transition } from 'd3-transition';
 import { find, maxBy } from 'lodash-es';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useRef } from 'react';
+import { injectIntl } from 'react-intl';
 import styled from 'styled-components';
 import SelectedItemContext from '../../contexts/SelectedItemContext';
 import useHasElementEntered from '../../hooks/useHasElementEntered';
@@ -56,7 +57,7 @@ const Chart = styled.div`
   }
 `;
 
-const ChartDistanceComparison = ({ runs }) => {
+const ChartDistanceComparison = ({ runs, intl }) => {
   const margin = { top: 60, right: 60, bottom: 60, left: 60 };
   const width = 800 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -164,7 +165,12 @@ const ChartDistanceComparison = ({ runs }) => {
             d =>
               `rotate(-90, ${xScale(d.id) + xScale.bandwidth() - 5}, ${height})`
           )
-          .text(d => `${d.distance} meters`);
+          .text(
+            d =>
+              `${d.distance} ${intl.formatMessage({
+                id: 'chartDistanceComparison.meters',
+              })}`
+          );
       }
     },
     [runs, chart, hasElementEntered]
@@ -210,4 +216,4 @@ ChartDistanceComparison.propTypes = {
   ),
 };
 
-export default ChartDistanceComparison;
+export default injectIntl(ChartDistanceComparison);

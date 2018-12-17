@@ -27,7 +27,7 @@ const Chart = styled.div`
   }
 `;
 
-const ChartDistanceComparison = ({ runs, type }) => {
+const ChartDistanceComparison = ({ runs }) => {
   const margin = { top: 60, right: 60, bottom: 60, left: 60 };
   const width = 800 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -210,9 +210,6 @@ const ChartDistanceComparison = ({ runs, type }) => {
           runs,
           run => run.id === id && run.type === type
         );
-        console.log('====================================');
-        console.log(selectedRun, runs, selectedItem);
-        console.log('====================================');
         if (selectedRun) {
           // stroke colors
           const update = container

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { orderBy, truncate, pick } from 'lodash-es';
+import { injectIntl } from 'react-intl';
 import ChartEvolutionOverTime from '../ChartEvolutionOverTime';
 import ChartDistanceComparison from '../ChartDistanceComparison';
 import ChartPaceComparison from '../ChartPaceComparison';
@@ -53,19 +54,21 @@ const List = styled.div`
   flex: 1;
 `;
 
-const charts = [
-  {
-    label: 'Progress over time',
-  },
-  {
-    label: 'Pace comparison',
-  },
-  {
-    label: 'Distance comparison',
-  },
-];
-
-const RunComparison = ({ title, runs, type, location, history, match }) => {
+const RunComparison = ({ title, runs, type, intl }) => {
+  const charts = useMemo(
+    () => [
+      {
+        label: intl.formatMessage({ id: 'runComparison.evolutionOverTime' }),
+      },
+      {
+        label: intl.formatMessage({ id: 'runComparison.speedComparison' }),
+      },
+      {
+        label: intl.formatMessage({ id: 'runComparison.distanceComparison' }),
+      },
+    ],
+    []
+  );
   const [currentChart, setChart] = useState(charts[0]);
   return (
     <div>
@@ -146,4 +149,4 @@ RunComparison.propTypes = {
   runs: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default RunComparison;
+export default injectIntl(RunComparison);

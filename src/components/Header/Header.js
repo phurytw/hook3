@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -41,7 +42,9 @@ const Header = ({ profilePicture, fullName }) => (
       </Link>
     </ProfilePicture>
     <Main>
-      <Title>Hi {fullName}!</Title>
+      <Title>
+        <FormattedMessage id="header.hello" values={{ name: fullName }} />
+      </Title>
     </Main>
   </HeaderContainer>
 );

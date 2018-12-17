@@ -13,6 +13,7 @@ import {
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import Highlights from '../Highlights';
 import ChartTopKudosers from '../ChartTopKudosers';
 import ReferenceList from '../ReferenceList';
@@ -144,7 +145,9 @@ export const Summary = props => {
         }}
         totalRuns={{ athleteId, count: totalRuns.count }}
       />
-      <SectionTitle>Your most frequent runs</SectionTitle>
+      <SectionTitle>
+        <FormattedMessage id="summary.mostFrequentRunsTitle" />
+      </SectionTitle>
       <Section>
         <SectionGraph>
           <ChartRunsByFrequency
@@ -184,7 +187,9 @@ export const Summary = props => {
           />
         </SectionList>
       </Section>
-      <SectionTitle>People who give you the most kudos</SectionTitle>
+      <SectionTitle>
+        <FormattedMessage id="summary.topKudosersTitle" />
+      </SectionTitle>
       <Section>
         <SectionGraph>
           <ChartTopKudosers kudosers={topKudosers} />

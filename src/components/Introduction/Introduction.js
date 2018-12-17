@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import Button from '../Button';
 import ContainerBase from '../Container';
 import Footer from '../Footer';
@@ -20,15 +21,14 @@ const Introduction = ({ onStart }) => (
     <Content>
       <div>
         <h1>
-          Welcome to Hook3! A Strava performance analyzer created using React
-          hooks and D3!
+          <FormattedMessage id="introduction.title" />
         </h1>
         <article>
-          Get pointless statistics about you such as:
-          <div>Your performance over time on matching group of segments!</div>
-          <div>Your name!</div>
+          <FormattedHTMLMessage id="introduction.description" />
         </article>
-        <Button onClick={onStart}>Let's get started!</Button>
+        <Button onClick={onStart}>
+          <FormattedMessage id="introduction.getStartedButton" />
+        </Button>
       </div>
     </Content>
     <Footer />

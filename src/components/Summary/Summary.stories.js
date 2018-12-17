@@ -1,8 +1,10 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { storiesOf } from '@storybook/react';
 import { withConsole } from '@storybook/addon-console';
 import Summary from './Summary';
 import Container from '../Container';
+import i18n from '../../i18n';
 
 export const props = {
   athleteId: 28445856,
@@ -782,6 +784,10 @@ export const props = {
 
 storiesOf('Screen: Summary', module)
   .addDecorator((story, context) =>
-    withConsole()(() => <Container>{story()}</Container>)(context)
+    withConsole()(() => (
+      <IntlProvider locale="en-US" messages={i18n['en-US']}>
+        <Container>{story()}</Container>
+      </IntlProvider>
+    ))(context)
   )
   .add('default', () => <Summary {...props} />);

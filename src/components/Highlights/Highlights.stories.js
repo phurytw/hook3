@@ -1,7 +1,9 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { storiesOf } from '@storybook/react';
 import { withConsole } from '@storybook/addon-console';
 import Highlights from './Highlights';
+import i18n from '../../i18n';
 
 export const highLightsProps = {
   longestRun: {
@@ -30,7 +32,13 @@ export const highLightsProps = {
 };
 
 storiesOf('Highlights', module)
-  .addDecorator((story, context) => withConsole()(story)(context))
+  .addDecorator((story, context) =>
+    withConsole()(() => (
+      <IntlProvider locale="en-US" messages={i18n['en-US']}>
+        {story()}
+      </IntlProvider>
+    ))(context)
+  )
   .add('highlights', () => <Highlights {...highLightsProps} />)
   .add('highlights with truncated run names', () => (
     <Highlights

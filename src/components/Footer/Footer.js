@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import { primary, secondary } from '../colors';
 
 const Footer = styled.footer`
@@ -19,7 +20,10 @@ const Link = styled.a`
 
 export default () => (
   <Footer>
-    <Link href="https://github.com/lith-light-g/hook3">Source code</Link>-
+    <Link href="https://github.com/lith-light-g/hook3">
+      <FormattedMessage id="footer.source" />
+    </Link>
+    -
     <Link href="https://lith-light-g.github.io/hook3/storybook">Storybook</Link>
   </Footer>
 );

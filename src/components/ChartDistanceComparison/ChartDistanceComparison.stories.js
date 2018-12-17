@@ -1,8 +1,10 @@
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import { storiesOf } from '@storybook/react';
 import { withConsole } from '@storybook/addon-console';
 import ChartDistanceComparison from './ChartDistanceComparison';
 import SelectedItemProvider from '../../contexts/SelectedItemProvider';
+import i18n from '../../i18n';
 import Container from '../Container';
 
 export const props = {
@@ -87,9 +89,11 @@ export const props = {
 storiesOf('Chart: Distance Comparison', module)
   .addDecorator((story, context) =>
     withConsole()(() => (
-      <SelectedItemProvider>
-        <Container>{story()}</Container>
-      </SelectedItemProvider>
+      <IntlProvider locale="en-US" messages={i18n['en-US']}>
+        <SelectedItemProvider>
+          <Container>{story()}</Container>
+        </SelectedItemProvider>
+      </IntlProvider>
     ))(context)
   )
   .add('default', () => <ChartDistanceComparison {...props} />);
