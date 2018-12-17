@@ -2,7 +2,7 @@
   "name": "hook4",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lith-light-g.github.io/hook3",
+  "homepage": "https://lith-light-g.github.io/hook3",
   "dependencies": {
     "d3": "^5.7.0",
     "d3-axis": "^1.0.12",
