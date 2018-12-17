@@ -20,8 +20,6 @@ const Link = styled.a`
 export default () => (
   <Footer>
     <Link href="https://github.com/lith-light-g/hook3">Source code</Link>-
-    <Link href="https://lith-light-g.github.io/hook3/storybook.html">
-      Storybook
-    </Link>
+    <Link href="https://lith-light-g.github.io/hook3/storybook">Storybook</Link>
   </Footer>
 );
